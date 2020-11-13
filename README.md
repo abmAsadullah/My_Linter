@@ -25,8 +25,8 @@ This project is for checking errors of linter.
 3. Copy and paste the following code into the Terminal: git clone `https://github.com/abmasadullah/My_Linter`
 4. Run `cd My_Linter`
 5. Run `ruby-install ruby`
-6. Run `bundle install`
-7. Run `gem install bundler`
+6. Run `gem install bundler`
+7. Run `bundle install`
 8. Finally run `ruby bin/main.rb`
 
 ## Author
