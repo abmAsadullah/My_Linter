@@ -11,7 +11,7 @@ def add_error
 end
 
 def no_errors
-  return puts 'No errors detected'.blue unless @total_errors != 0
+  return puts 'No errors detected'.green unless @total_errors != 0
   case @total_errors
   when 1
     puts "Total error #{@total_errors}".red
