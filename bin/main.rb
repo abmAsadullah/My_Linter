@@ -34,7 +34,8 @@ def error_lines
 end
 
 def show_errors
-  return unless @total_errors > 0
+  return unless @total_errors.positive?
+  
   @lines_to_use.each_with_index do |value, _index|
     @error_arr.each_with_index do |_x, y|
       txt1 = "\nLine #{value} col #{@error_arr[y][:offset]}:".blue

@@ -1,7 +1,7 @@
 require 'strscan'
 require_relative 'scan_file.rb'
 require_relative 'colors_file.rb'
-# rubocop:disable Metrics/LineLength
+
 def check_error(filepath)
   @check_file = LintFile.new(filepath)
   @check_file.read
@@ -26,10 +26,10 @@ def check_loop
   tags_results
 end
 
-# rubocop:disable Metrics/AbcSize
 def whitespace(line)
   text = 'Excess Whitespace Detected'
   return if @empty_line.include?(line + 1)
+
   pos = @check_file.lines[line].string.gsub(/ {2,}/).map { |_, _arr| Regexp.last_match.begin(0) }
   # rubocop:enable Metrics/LineLength
   pos.shift if pos[0].nil? || pos[0].zero?
@@ -40,8 +40,10 @@ end
 def trailing_whitespace(line)
   text = 'Trailing Whitespace Detected'
   return if @empty_line.include?(line + 1)
+
   pointer = @check_file.lines[line].string.length
   return unless @check_file.lines[line].string.reverse[0..1].match?(/ {1,}/)
+
   @error_arr.push(lpos: line + 1, msg: text, offset: pointer)
 end
 
@@ -52,6 +54,7 @@ end
 
 def indentation(line)
   return if @empty_line.include?(line + 1)
+
   text = 'Indentation Error Detected'
   pos = position_whitespace(line)
   test_end(line)
@@ -114,4 +117,3 @@ def compare(open, close, punct)
     @punctation_arr.push(sign: punct, result: result, msg: 'to close')
   end
 end
-# rubocop:enable Metrics/LineLength
