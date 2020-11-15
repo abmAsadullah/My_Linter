@@ -31,11 +31,9 @@ def whitespace(line)
   return if @empty_line.include?(line + 1)
 
   pos = @check_file.lines[line].string.gsub(/ {2,}/).map { |_, _arr| Regexp.last_match.begin(0) }
-  # rubocop:enable Metrics/LineLength
   pos.shift if pos[0].nil? || pos[0].zero?
   @error_arr.push(lpos: line + 1, msg: text, offset: pos) unless pos[0].nil?
 end
-# rubocop:enable Metrics/AbcSize
 
 def trailing_whitespace(line)
   text = 'Trailing Whitespace Detected'

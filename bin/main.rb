@@ -1,4 +1,3 @@
-
 require 'strscan'
 require_relative '../lib/scan_file.rb'
 require_relative '../lib/errors_file.rb'
@@ -12,6 +11,7 @@ end
 
 def no_errors
   return puts 'No errors detected'.green unless @total_errors != 0
+
   case @total_errors
   when 1
     puts "Total error #{@total_errors}".red
@@ -35,7 +35,7 @@ end
 
 def show_errors
   return unless @total_errors.positive?
-  
+
   @lines_to_use.each_with_index do |value, _index|
     @error_arr.each_with_index do |_x, y|
       txt1 = "\nLine #{value} col #{@error_arr[y][:offset]}:".blue

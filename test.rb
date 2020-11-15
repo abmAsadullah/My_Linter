@@ -22,9 +22,9 @@ hash = {:key=>"first", :value=>1}
 
  arr = ['This is just
 an example of
-multiple  lines'
+multiple  lines']
 
-arr_num = 1, 2, 3, 4]
+arr_num = [1, 2, 3, 4]
 
 something(text, a, b)
 just_print(arr)
