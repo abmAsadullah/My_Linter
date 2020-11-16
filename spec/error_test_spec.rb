@@ -23,6 +23,24 @@ describe LintFile do
     end
   end
 
+  describe 'Testing blank lines' do
+    it '37 lines empty inside the file tested' do
+      check_error(original)
+      expect(empty_line).to eql(33)
+    end
+    it 'The first line empty is 7' do
+      check_error(original)
+      expect(@empty_line[0]).to eql(7)
+    end
+  end
+
+  describe 'Testing Double blank lines' do
+    it 'The first double line empty is 16' do
+      check_error(original)
+      expect(@double_empty_line[0]).to eql(16)
+    end
+  end
+
   describe 'Indentation method #indentation' do
     it 'There is one Indentation error on line (lpos) 4 ' do
       check_error(original)
