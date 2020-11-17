@@ -17,9 +17,16 @@ describe LintFile do
     it 'All data is an array' do
       expect(file_open.lines.class).to eql(Array)
     end
+    it 'All data is not an string' do
+      expect(file_open.lines.class).not_to eql(String)
+    end
     it 'Lines equal to length of array' do
       file_open.read
       expect(file_open.lines.count).to eql(File.open(original).count)
+    end
+    it 'Lines not equal to more than length of array' do
+      file_open.read
+      expect(file_open.lines.count+1).not_to eql(File.open(original).count)
     end
   end
 
@@ -28,9 +35,17 @@ describe LintFile do
       check_error(original)
       expect(empty_line).to eql(33)
     end
+    it '30 lines not empty inside the file tested' do
+      check_error(original)
+      expect(empty_line).not_to eql(30)
+    end
     it 'The first line empty is 7' do
       check_error(original)
       expect(@empty_line[0]).to eql(7)
+    end
+    it 'The first line empty is not 8' do
+      check_error(original)
+      expect(@empty_line[0]).not_to eql(8)
     end
   end
 
@@ -39,12 +54,20 @@ describe LintFile do
       check_error(original)
       expect(@double_empty_line[0]).to eql(16)
     end
+    it 'The first double line empty is not in 19' do
+      check_error(original)
+      expect(@double_empty_line[0]).not_to eql(19)
+    end
   end
 
   describe 'Indentation method #indentation' do
     it 'There is one Indentation error on line (lpos) 4 ' do
       check_error(original)
       expect(@error_arr.include?({ lpos: 4, msg: 'Indentation Error Detected', offset: 0 })).to eql(true)
+    end
+    it 'There is not Indentation error on line 2' do
+      check_error(original)
+      expect(@error_arr.include?({ lpos: 2, msg: 'Indentation Error Detected', offset: 0 })).not_to eql(true)
     end
   end
 
@@ -55,10 +78,20 @@ describe LintFile do
         trailing_whitespace(1).include?({ lpos: 4, msg: 'Indentation Error Detected', offset: 0 })
       ).to eql(true)
     end
+    it 'Second line (index = 1) has not whitespace at the two of the line' do
+      check_error(original)
+      expect(
+        trailing_whitespace(1).include?({ lpos: 2, msg: 'Indentation Error Detected', offset: 0 })
+      ).not_to eql(true)
+    end
 
     it 'There is one Indentation error on line (lpos) 4 ' do
       check_error(original)
       expect(@error_arr.include?({ lpos: 4, msg: 'Indentation Error Detected', offset: 0 })).to eql(true)
+    end
+    it 'There is no Indentation error on line 2 ' do
+      check_error(original)
+      expect(@error_arr.include?({ lpos: 2, msg: 'Indentation Error Detected', offset: 0 })).not_to eql(true)
     end
   end
 

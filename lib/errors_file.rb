@@ -57,9 +57,7 @@ def indentation(line)
   pos = position_whitespace(line)
   test_end(line)
  
-  if pos[0] != @pos_white
-    @error_arr.push(lpos: line + 1, msg: text, offset: pos[0])
-  end
+  @error_arr.push(lpos: line + 1, msg: text, offset: pos[0]) if pos[0] != @pos_white 
 
   test_def(line)
 end
