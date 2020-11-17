@@ -26,7 +26,7 @@ describe LintFile do
     end
     it 'Lines not equal to more than length of array' do
       file_open.read
-      expect(file_open.lines.count+1).not_to eql(File.open(original).count)
+      expect(file_open.lines.count + 1).not_to eql(File.open(original).count)
     end
   end
 
